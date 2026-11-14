@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Algoritmo Genético – Projetos do Campus</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Algoritmo Genético</h1>
+  <p>Seleção de projetos de melhoria do campus</p>
+</header>
+<p class="repo"><a href="https://github.com/laranubiamartins/algoritmo-genetico-projetos" target="_blank" rel="noopener">Repositório no GitHub</a></p>
+<main>
+  <section class="card">
+    <h2>Projetos</h2>
+    <table id="projTable"><thead><tr><th>Gene</th><th>Nome</th><th>Custo (R$)</th><th>Benefício</th><th></th></tr></thead><tbody></tbody></table>
+    <button id="addProj" type="button">Adicionar projeto</button>
+  </section>
+
+  <section class="card">
+    <h2>Parâmetros</h2>
+    <div class="grid">
+      <label>Orçamento disponível (R$)<input id="budget" value="7000"></label>
+      <label>Tamanho da população<input id="popSize" value="20"></label>
+      <label>Número de gerações<input id="generations" value="50"></label>
+      <label>Taxa de cruzamento (%)<input id="crossRate" value="80"></label>
+      <label>Taxa de mutação por gene (%)<input id="mutRate" value="5"></label>
+      <label>Tamanho do torneio<input id="tournamentSize" value="2"></label>
+      <label>Indivíduos de elite<input id="elite" value="1"></label>
+      <label>Semente aleatória<input id="seed" value="42"></label>
+    </div>
+    <p id="errors" role="alert"></p>
+    <div class="buttons">
+      <button id="btnRun" type="button">Executar</button>
+      <button id="btnPause" type="button">Pausar</button>
+      <button id="btnStep" type="button">Avançar uma geração</button>
+      <button id="btnReset" type="button">Reiniciar</button>
+      <button id="btnTests" type="button" class="secondary">Rodar testes</button>
+    </div>
+    <p id="status"></p>
+  </section>
+
+  <section class="card">
+    <h2>Evolução</h2>
+    <div class="stats">
+      <div><span id="sGen">–</span>geração atual</div>
+      <div><span id="sBestGen">–</span>melhor aptidão da geração</div>
+      <div><span id="sAvg">–</span>aptidão média</div>
+      <div><span id="sBest">–</span>melhor acumulado</div>
+    </div>
+    <canvas id="chart" width="1600" height="560"></canvas>
+    <p class="legend"><i style="background:#0284c7"></i>melhor da geração <i style="background:#ea580c"></i>melhor acumulado <i style="background:#64748b"></i>média</p>
+  </section>
+
+  <section class="card">
+    <h2>Animação da última geração</h2>
+    <p class="hint">Toca ao usar "Avançar uma geração". Durante "Executar" fica desligada; use "Reproduzir" para rever a última geração.</p>
+    <div class="buttons">
+      <button id="btnReplay" type="button" class="secondary">Reproduzir última geração</button>
+      <button id="btnSkip" type="button" class="secondary">Parar animação</button>
+      <label class="inline">Velocidade <select id="animSpeed"><option value="1400">Lenta</option><option value="800" selected>Normal</option><option value="300">Rápida</option></select></label>
+    </div>
+    <p id="animCap">Avance uma geração para ver os pais, o corte, a mutação e a reparação.</p>
+    <div id="stage"></div>
+    <p class="legend"><i style="background:#2563eb"></i>genes do pai 1 <i style="background:#d97706"></i>genes do pai 2 <i style="background:#dc2626"></i>bit mutado <i style="background:#7c3aed"></i>projeto removido na reparação <i style="background:#059669"></i>elite</p>
+  </section>
+
+  <section class="card">
+    <h2>Melhor solução encontrada</h2>
+    <div id="bestBox">–</div>
+  </section>
+
+  <section class="card wide">
+    <h2>Log das etapas</h2>
+    <pre id="log"></pre>
+  </section>
+  <section class="card wide">
+    <h2>Histórico por geração</h2>
+    <div class="scroll"><table id="hist"><thead><tr><th>Geração</th><th>Melhor da geração</th><th>Média</th><th>Melhor acumulado</th></tr></thead><tbody></tbody></table></div>
+  </section>
+  <section class="card wide" id="testsCard" hidden>
+    <h2>Resultado dos testes</h2>
+    <pre id="testsOut"></pre>
+  </section>
+</main>
+<script src="genetic.js"></script>
+<script src="tests.js"></script>
+<script src="anim.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
